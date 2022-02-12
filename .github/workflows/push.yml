@@ -1,0 +1,22 @@
+name: Push
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: publish version
+        uses: actions/setup-node@v2
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
