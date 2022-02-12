@@ -1,9 +1,8 @@
-name: Push
+name: Push master
 
 on:
   push:
-    branches-ignore:
-      - master
+    branches: [master]
 
 jobs:
   continuous-integration:
@@ -17,7 +16,8 @@ jobs:
         with:
           node-version: '14.x'
           registry-url: 'https://npm.pkg.github.com'
-
+          scope: '@huongttt-vbee'
+          
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
